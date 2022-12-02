@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 
 export default class Form extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+    };
+  }
+
+  handleEmail = (event) => {
+   this.setState({ email: event.target.value }); 
+  }
+
   render() {
+    const { email } = this.state;
     return (
       <div>
         <h1>Formulários React</h1>
@@ -21,6 +33,8 @@ export default class Form extends Component {
               type="email"
               name="email"
               id="email"
+              value={ email }
+              onChange={this.handleEmail}
             />
           </label>
           <br />
