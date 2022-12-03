@@ -4,16 +4,24 @@ export default class Form extends Component {
   constructor() {
     super();
     this.state = {
+      age: '',
+      confirmation: false,
+      description: '',
       email: '',
+      name: '',
     };
   }
 
-  handleEmail = (event) => {
-   this.setState({ email: event.target.value }); 
-  }
+  handleForm = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
 
   render() {
-    const { email } = this.state;
+    const { age, confirmation, description, email, name } = this.state;
     return (
       <div>
         <h1>Formulários React</h1>
@@ -24,6 +32,8 @@ export default class Form extends Component {
               type="text"
               name="name"
               id="name"
+              value={name}
+              onChange={this.handleForm}
             />
           </label>
 
@@ -33,8 +43,8 @@ export default class Form extends Component {
               type="email"
               name="email"
               id="email"
-              value={ email }
-              onChange={this.handleEmail}
+              value={email}
+              onChange={this.handleForm}
             />
           </label>
           <br />
@@ -43,6 +53,8 @@ export default class Form extends Component {
             <select
               name="age"
               id="age"
+              value={age}
+              onChange={this.handleForm}
             >
               <option value="adult">Maior que 18</option>
               <option value="underage">Menor que 18</option>
@@ -57,6 +69,19 @@ export default class Form extends Component {
               id="description"
               cols="30"
               rows="10"
+              value={description}
+              onChange={this.handleForm}
+            />
+          </label>
+          <br />
+          <label htmlFor="confirmation">
+            As informações acima estão corretas?
+            <input
+              type="checkbox"
+              name="confirmation"
+              id="confirmation"
+              value={confirmation}
+              onChange={this.handleForm}
             />
           </label>
         </form>
