@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+
+import Confirmation from './Confirmation';
+import Description from './Description';
+import EmailInput from './EmailInput';
+import NameInput from './NameInput';
+import PictureInput from './PictureInput';
 import SelectInput from './SelectInput';
 
 export default class Form extends Component {
@@ -32,27 +38,15 @@ export default class Form extends Component {
           <fieldset>
             <legend>Dados pessoais</legend>
 
-            <label htmlFor="name">
-              Nome:
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={name}
-                onChange={this.handleForm}
-              />
-            </label>
+            <NameInput
+              name={name}
+              handleForm={this.handleForm}
+            />
 
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                onChange={this.handleForm}
-              />
-            </label>
+            <EmailInput
+              email={email}
+              handleForm={this.handleForm}
+            />
             <br />
 
             <SelectInput
@@ -63,41 +57,22 @@ export default class Form extends Component {
 
           <fieldset>
             <legend>Arquivos</legend>
-            <label htmlFor="description">
-              Fale um pouco sobre você:
-              <br />
-              <textarea
-                name="description"
-                id="description"
-                cols="30"
-                rows="10"
-                value={description}
-                onChange={this.handleForm}
-              />
-            </label>
+            <Description
+              description={description}
+              handleForm={this.handleForm}
+            />
             <br />
 
-            <label htmlFor="picture">
-              <input
-                type="file"
-                name="picture"
-                id="picture"
-                value={picture}
-                onChange={this.handleForm}
-              />
-            </label>
+            <PictureInput
+              picture={picture}
+              handleForm={this.handleForm}
+            />
             <br />
 
-            <label htmlFor="confirmation">
-              As informações acima estão corretas?
-              <input
-                type="checkbox"
-                name="confirmation"
-                id="confirmation"
-                value={confirmation}
-                onChange={this.handleForm}
-              />
-            </label>
+            <Confirmation
+              confirmation={confirmation}
+              handleForm={this.handleForm}
+            />
           </fieldset>
         </form>
       </div>
