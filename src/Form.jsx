@@ -15,21 +15,42 @@ export default class Form extends Component {
       confirmation: false,
       description: '',
       email: '',
+      errors: true,
       name: '',
       picture: '',
     };
   }
 
+  handleErrors = () => {
+    const { age, confirmation, description, email, name } = this.state;
+
+    const errorCases = [
+      !age.length,
+      !confirmation,
+      !description.length,
+      !email.match(/^\S+@\S+$/i),
+      !name.length,
+    ];
+
+    const filledForm = errorCases.every((error) => error !== true);
+
+    this.setState({ errors: !filledForm });
+  };
+
   handleForm = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.handleErrors
+    );
   };
 
   render() {
-    const { age, confirmation, description, email, name, picture } = this.state;
+    const { age, confirmation, description, email, errors, name, picture } =
+      this.state;
     return (
       <div>
         <h1>Formulários React</h1>
@@ -75,6 +96,15 @@ export default class Form extends Component {
             />
           </fieldset>
         </form>
+        {errors ? (
+          <span style={{ color: 'red' }}>
+            Preencha todos os campos corretamente.
+          </span>
+        ) : (
+          <span style={{ color: 'green' }}>
+            Todos os campos foram preenchidos corretamente.
+          </span>
+        )}
       </div>
     );
   }
