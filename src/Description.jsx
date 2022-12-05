@@ -16,6 +16,7 @@ export default class Description extends Component {
           value={description}
           onChange={handleForm}
         />
+        {!description ? 'Forneça uma descrição sobre você!' : ''}
       </label>
     );
   }
